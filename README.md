@@ -11,7 +11,7 @@ Current methods included:
 
 M. T. Khan, Y. Cao, F. Shafait, and W. Jun "ERBMA-Net: Enhanced Random Binary Multilevel Attention Network for Facial Depression Recognition.” IEEE Transactions on Computational Social Systems, 2025. DOI: https://doi.org/10.1109/TCSS.2025.3596047
 
-# LMTFormer
+# LMTformer
 
 L. He, J. Zhao, J. Zhang, J. Jiang, S. Qi, Z. Wang, and D. Wu, LMTformer: facial depression recognition with lightweight multi-scale transformer from videos, Appl. Intell. 5, 195, 2025.
 
