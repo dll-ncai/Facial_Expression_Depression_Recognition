@@ -33,4 +33,4 @@ L. He, J. Zhao, J. Zhang, J. Jiang, S. Qi, Z. Wang, and D. Wu, LMTformer: facial
 Pan, Y., Shang, Y., Liu, T., Shao, Z., Guo, G., Ding, H., & Hu, Q. "Spatial–temporal attention network for depression recognition from facial videos." Expert systems with applications, 237, 121410, 2024.
 
 # AVEC2014 Dataset
-AVEC2014 dataset is a public dataset, which contains 300 videos of depressed patients. Each video had corresponding ground truth scores and varied in duration from 6 to 248 seconds, recorded at 30 frames per second (fps). 
+AVEC2014 dataset is a public dataset, which contains 300 videos of depressed patients. Each video has corresponding ground truth (BDI-II) scores and varied in duration from 6 to 248 seconds, recorded at 30 frames per second (fps). 
