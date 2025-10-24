@@ -512,8 +512,8 @@ def save_frames_and_features(frames, output_dir, split, category, video_name, mo
 
 # Step 9: Save extracted features to a CSV file
 def save_features_to_csv(features, output_csv):
-    """Save 1536-dimensional features (face, eyes, mouth) to a CSV file."""
-    face_columns = [f"face_feature_{i}" for i in range(9216)] #16384 for 3 by 3
+    """Save multi-dimensional features (face, eyes, mouth) to a CSV file."""
+    face_columns = [f"face_feature_{i}" for i in range(9216)]
     eyes_columns = [f"eyes_feature_{i}" for i in range(9216)]
     mouth_columns = [f"mouth_feature_{i}" for i in range(9216)]
     all_columns = ["filename"] + face_columns + eyes_columns + mouth_columns
