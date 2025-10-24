@@ -1,4 +1,13 @@
-# The author of this code is Dr. Muhammad Turyalai Khan. Cite his paper if you use it.
+"""
+Feature Extraction Pipeline for Facial Depression Recognition
+
+This script performs region-based (face, eyes, mouth) feature extraction 
+from facial videos using hybrid CNN-based models. It supports optional 
+augmentation, region cropping, and saving of extracted features as CSV files.
+
+Author: Dr. Muhammad Turyalai Khan
+Year: 2025
+"""
 
 import os
 import cv2
@@ -9,10 +18,19 @@ import torch.nn as nn
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from torch.nn import functional as F
 from mtcnn import MTCNN
+from config import BASE_DATASET_DIR, OUTPUT_DIR, OUTPUT_CSV_FILES, AUGMENT, AUGMENT_COUNT
 
 # Step 1: Create Directories for Data Organization
 def create_directories(base_dir):
-    """Create directories for face, eyes, mouth, and frames across splits and categories."""
+    """
+    Create directories for face, eyes, and mouth data across train, dev, and test splits.
+
+    Args:
+        base_dir (str): Path to the base directory where folders will be created.
+
+    Returns:
+        None
+    """
     for region in ['face', 'eyes', 'mouth']:
         for split in ['train', 'dev', 'test']:
             for category in ['Freeform', 'Northwind']:
@@ -34,7 +52,17 @@ data_gen = ImageDataGenerator(
 )
 
 def augment_image(image, generator, augment_count=10):
-    """Generate augmented images."""
+    """
+    Generate augmented versions of an input image.
+
+    Args:
+        image (np.ndarray): Input image for augmentation.
+        generator (ImageDataGenerator): Keras image data generator.
+        augment_count (int): Number of augmented images to generate.
+
+    Returns:
+        list[np.ndarray]: List of augmented image arrays.
+    """
     image = np.expand_dims(image, axis=0)  # Add batch dimension
     return [next(generator.flow(image, batch_size=1))[0].astype(np.uint8) for _ in range(augment_count)]
 
@@ -375,7 +403,17 @@ class CombinedFeatureExtractor(nn.Module):
 
 # Step 7: Extract face regions from video using MTCNN and handle padding for smaller crops
 def crop_face_regions(video_path):
-    """Crop face, eyes, and mouth regions from video frames using MTCNN."""
+    """
+    Crop specific facial regions (face, eyes, or mouth) from an image frame.
+
+    Args:
+        frame (np.ndarray): The input image frame (BGR).
+        face_detector (object): A pretrained face detector (e.g., MTCNN).
+        region (str): The facial region to extract ('face', 'eyes', or 'mouth').
+
+    Returns:
+        np.ndarray or None: Cropped region image or None if detection fails.
+    """
     detector = MTCNN()
     video_capture = cv2.VideoCapture(video_path)
 
@@ -529,7 +567,23 @@ def save_features_to_csv(features, output_csv):
 
 # Step 10: Process Videos and Save Frames and Features
 def process_videos(input_dir, output_dir, model, output_csv_files, augment=True, augment_count=10):
-    """Process videos to extract face, eyes, and mouth features, save images, and save features to CSV."""
+    """
+    Process all videos in the dataset to extract and save facial features.
+
+    For each video, this function extracts frames, crops facial regions, optionally augments them,
+    and computes deep feature representations using the provided model. Results are saved as CSV.
+
+    Args:
+        input_dir (str): Path to dataset base directory.
+        output_dir (str): Path to directory where output CSVs will be stored.
+        model (torch.nn.Module or tf.keras.Model): Model used for feature extraction.
+        output_csv_files (dict): Mapping of dataset splits to output CSV paths.
+        augment (bool): Whether to apply augmentation.
+        augment_count (int): Number of augmentations per frame (if augment=True).
+
+    Returns:
+        None
+    """
     create_directories(output_dir)
 
     for split in ['train', 'dev', 'test']:
@@ -558,8 +612,9 @@ def process_videos(input_dir, output_dir, model, output_csv_files, augment=True,
                     # Save frames for debugging and visualization
                     save_frames_and_features(frames, output_dir, split, category, video_name, model, split_csv, augment if split == 'train' else False, augment_count)
 if __name__ == "__main__":
-    input_base_directory = r"C:\Users\Turyal\Desktop\Depression recognition using facial features\MyAVEC2014\AVEC2014"
-    output_directory = r"C:\Users\Turyal\Desktop\MTK\check"
+    input_base_directory = BASE_DATASET_DIR
+    output_directory = OUTPUT_DIR
+    output_csv_files = OUTPUT_CSV_FILES
 
     output_csv_files = {
         'train': os.path.join(output_directory, 'train_features.csv'),
@@ -577,8 +632,8 @@ if __name__ == "__main__":
         output_dir=output_directory,
         model=model,
         output_csv_files=output_csv_files,
-        augment=True,  # Enable augmentation for training
-        augment_count=10  # Number of augmentations per frame
+        augment=AUGMENT,
+        augment_count=AUGMENT_COUNT
     )
 
     print("Processing complete.")
