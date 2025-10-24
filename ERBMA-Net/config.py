@@ -1,12 +1,16 @@
 import os
 
-# Base directory (user should update this to their local dataset path)
-# By default, assume the dataset is inside the project folder
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# === Base Directories (Change these before running) ===
+BASE_DATASET_DIR = os.path.join("data", "AVEC2014")
+OUTPUT_DIR = os.path.join("results")
 
-# Input and output directories
-input_base_directory = os.path.join(BASE_DIR, "data", "AVEC2014")
-output_directory = os.path.join(BASE_DIR, "outputs")
+# === CSV Output Paths ===
+OUTPUT_CSV_FILES = {
+    'train': os.path.join(OUTPUT_DIR, 'train_features.csv'),
+    'dev': os.path.join(OUTPUT_DIR, 'dev_features.csv'),
+    'test': os.path.join(OUTPUT_DIR, 'test_features.csv'),
+}
 
-# Make sure output folder exists
-os.makedirs(output_directory, exist_ok=True)
+# === Augmentation Settings ===
+AUGMENT = True        # Whether to apply augmentation
+AUGMENT_COUNT = 10    # Number of augmentations per frame
