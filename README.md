@@ -21,6 +21,9 @@ OpenCV for frame extraction at seconds interval.
 MTCNN for facial key points detection (face, eyes, mouth)
 Selective cropping of face (224x224), eyes (96x192), and mouth (96x128)
 
+Configuration:
+Update dataset and output paths in config.py if you are using a custom location.
+
 # LMTformer
 
 L. He, J. Zhao, J. Zhang, J. Jiang, S. Qi, Z. Wang, and D. Wu, LMTformer: facial depression recognition with lightweight multi-scale transformer from videos, Appl. Intell. 5, 195, 2025.
