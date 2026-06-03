@@ -9,7 +9,7 @@ Current methods included:
 
 # ERBMA-Net
 
-M. T. Khan, Y. Cao, F. Shafait, and W. Jun "ERBMA-Net: Enhanced Random Binary Multilevel Attention Network for Facial Depression Recognition.” IEEE Transactions on Computational Social Systems, 2025. DOI: https://doi.org/10.1109/TCSS.2025.3596047
+M. T. Khan, Y. Cao, F. Shafait, and W. Jun "ERBMA-Net: Enhanced Random Binary Multilevel Attention Network for Facial Depression Recognition.” IEEE Transactions on Computational Social Systems, vol. 13, no. 1, 2026. DOI: https://doi.org/10.1109/TCSS.2025.3596047
 
 Steps to use the code:
 First run the feature extraction code that will save train, validation, and test csv files.
@@ -23,6 +23,10 @@ Selective cropping of face (224x224), eyes (96x192), and mouth (96x128)
 
 Configuration:
 Update dataset and output paths in config.py if you are using a custom location.
+
+# LightFusionNet
+M. Bilal, M.T. Khan, F. Shafait, and H.A. Khan, LightFusionNet: A Lightweight Multimodal Fusion Framework Combining Facial Dynamics
+and rPPG Signals for Depression Severity Detection, International Conference on AI in Healthcare, 2026.
 
 # LMTformer
 
