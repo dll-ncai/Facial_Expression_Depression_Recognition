@@ -17,9 +17,9 @@ Secondly, run train code to train the regression model on the extracted features
 Third, run the test code to verify the performance on test data (test.csv file).
 
 Preprocessing steps:
-OpenCV for frame extraction at seconds interval.
-MTCNN for facial key points detection (face, eyes, mouth)
-Selective cropping of face (224x224), eyes (96x192), and mouth (96x128)
+OpenCV for frame extraction at five seconds interval.
+MTCNN for facial key points detection (face, eyes, mouth).
+Selective cropping of face (224x224), eyes (96x192), and mouth (96x128).
 
 Configuration:
 Update dataset and output paths in config.py if you are using a custom location.
